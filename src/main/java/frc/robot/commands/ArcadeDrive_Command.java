@@ -8,11 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class ArcadeDrive_Command extends Command {
   public ArcadeDrive_Command() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.m_subsystem);
   }
 
   // Called just before this Command runs the first time
@@ -23,6 +24,9 @@ public class ArcadeDrive_Command extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(1);
+    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(4);
+    Robot.m_subsystem.TeleopDrive(leftJoyY, rightJoyX);
   }
 
   // Make this return true when this Command no longer needs to run execute()

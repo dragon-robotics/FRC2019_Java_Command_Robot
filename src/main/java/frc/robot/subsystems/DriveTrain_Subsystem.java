@@ -40,9 +40,7 @@ public class DriveTrain_Subsystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void TeleopDrive(Joystick driver){
-    double leftJoyY = driver.getRawAxis(1);
-    double rightJoyX = driver.getRawAxis(4);
+  public void TeleopDrive(double leftJoyY, double rightJoyX){
     m_robotDrive.arcadeDrive(leftJoyY, rightJoyX);
   }
 
