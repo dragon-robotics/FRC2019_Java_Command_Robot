@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Cargo_Subsystem;
 
 // Commands //
 
@@ -27,7 +27,8 @@ import frc.robot.subsystems.DriveTrain_Subsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static final DriveTrain_Subsystem m_subsystem = new DriveTrain_Subsystem();
+  public static final DriveTrain_Subsystem m_drivetrain_subsystem = new DriveTrain_Subsystem();
+  public static final Cargo_Subsystem m_cargo_subsystem = new Cargo_Subsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;

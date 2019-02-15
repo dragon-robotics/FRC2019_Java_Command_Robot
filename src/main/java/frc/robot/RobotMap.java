@@ -26,7 +26,7 @@ public class RobotMap {
   public static final int MOTOR_RIGHTREAR = 1;
 
   /* TalonSRX */
-  public static final int TALON_CARGO = 1;
+  public static final int TALONSRX_CARGO = 1;
   public static final int TALON_HATCH = 2;
 
   /* Joystick port */
