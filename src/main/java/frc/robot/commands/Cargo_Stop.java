@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Cargo_Stop_Command extends Command {
-  public Cargo_Stop_Command() {
+public class Cargo_Stop extends Command {
+  public Cargo_Stop() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_cargo_subsystem);
   }

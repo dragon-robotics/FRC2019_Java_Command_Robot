@@ -7,38 +7,31 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;                // A WPI library used for controlling and obtaining the status of the compressor
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;       // A CTRE library used for control mode selection in the CTRE library
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;  // A CTRE library used for TalonSRX control using CAN protocol
-
-import frc.robot.RobotMap;
-import frc.robot.commands.Cargo_Stop;
+import frc.robot.commands.Compressor_On;
 
 /**
  * Add your docs here.
  */
-public class Cargo_Subsystem extends Subsystem {
+public class Compressor_Subsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final WPI_TalonSRX Cargo = new WPI_TalonSRX(RobotMap.TALONSRX_CARGO);
+
+  private final Compressor compressor = new Compressor(0);  // Compressor code
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Cargo_Stop());
-  }
-  public void MoveCargoUp(){
-    Cargo.set(1);
+    setDefaultCommand(new Compressor_On());
   }
 
-  public void MoveCargoDown(){
-    Cargo.set(-1);
+  public void Compressor_Start(){
+    compressor.setClosedLoopControl(true);
   }
 
-  public void Stop(){
-    Cargo.set(0);
+  public void Compressor_Stop(){
+    compressor.setClosedLoopControl(false);
   }
-
 }
-

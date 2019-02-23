@@ -27,7 +27,7 @@ public class RobotMap {
 
   /* TalonSRX */
   public static final int TALONSRX_CARGO = 1;
-  public static final int TALON_HATCH = 2;
+  public static final int TALONSRX_HATCH = 2;
 
   /* Joystick port */
   public static final int  J_STICK_DRIVER = 0;
@@ -46,11 +46,11 @@ public class RobotMap {
   public static final int BUTTON_RIGHTSTICK = 10;
 
   /* Pneumatics */
-  public static final int CAN_Compressor = 0;
-  public static final int CAN_doubleSolenoid_1_Left = 0;
-  public static final int CAN_doubleSolenoid_1_Right = 1;
-  public static final int CAN_doubleSolenoid_2_Left = 2;
-  public static final int CAN_doubleSolenoid_2_Right = 3;
+  public static final int CAN_COMPRESSOR = 0;
+  public static final int CAN_DOUBLESOLENOID_1_LEFT = 0;
+  public static final int CAN_DOUBLESOLENOID_1_RIGHT = 1;
+  public static final int CAN_DOUBLESOLENOID_2_LEFT = 2;
+  public static final int CAN_DOUBLESOLENOID_2_RIGHT = 3;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

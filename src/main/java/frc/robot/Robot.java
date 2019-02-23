@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // Subsystems //
 import frc.robot.subsystems.DriveTrain_Subsystem;
 import frc.robot.subsystems.Cargo_Subsystem;
-
+import frc.robot.subsystems.HatchPanel_Subsystem;
+import frc.robot.subsystems.Compressor_Subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +31,8 @@ import frc.robot.subsystems.Cargo_Subsystem;
 public class Robot extends TimedRobot {
   public static final DriveTrain_Subsystem m_drivetrain_subsystem = new DriveTrain_Subsystem();
   public static final Cargo_Subsystem m_cargo_subsystem = new Cargo_Subsystem();
+  public static final HatchPanel_Subsystem m_hatch_panel_subsystem = new HatchPanel_Subsystem();
+  public static final Compressor_Subsystem p_compressor_subsystem = new Compressor_Subsystem();
   public static OI m_oi;
 
   Command m_autonomousCommand;

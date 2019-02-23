@@ -10,8 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used for joystick buttons mapping
 
-import frc.robot.commands.Cargo_Up_Command;
-import frc.robot.commands.Cargo_Down_Command;
+import frc.robot.commands.Cargo_Up;
+import frc.robot.commands.Cargo_Down;
+import frc.robot.commands.HatchPanel_Forward;
+import frc.robot.commands.HatchPanel_Backward;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -74,7 +77,10 @@ public class OI {
     public final JoystickButton j_stick_control_rightStick = new JoystickButton(j_stick_control, 10);  // Right-Stick button
 
     public OI(){
-      j_stick_control_X.whileHeld(new Cargo_Up_Command());
-      j_stick_control_Y.whileHeld(new Cargo_Down_Command());
+      j_stick_control_X.whileHeld(new Cargo_Up());
+      j_stick_control_Y.whileHeld(new Cargo_Down());
+      j_stick_control_A.whileHeld(new HatchPanel_Forward());
+      j_stick_control_B.whileHeld(new HatchPanel_Backward());
+
     }
 }
