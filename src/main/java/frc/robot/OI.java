@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used fo
 import frc.robot.commands.Cargo_Up;
 import frc.robot.commands.Cargo_Down;
 import frc.robot.commands.HatchPanel_Forward;
+import frc.robot.commands.PistonDeploy;
+import frc.robot.commands.PistonRetract;
 import frc.robot.commands.HatchPanel_Backward;
 
 
@@ -77,10 +79,13 @@ public class OI {
     public final JoystickButton j_stick_control_rightStick = new JoystickButton(j_stick_control, 10);  // Right-Stick button
 
     public OI(){
-      j_stick_control_X.whileHeld(new Cargo_Up());
-      j_stick_control_Y.whileHeld(new Cargo_Down());
-      j_stick_control_A.whileHeld(new HatchPanel_Forward());
-      j_stick_control_B.whileHeld(new HatchPanel_Backward());
 
+      //j_stick_control_X.whileHeld(new Cargo_Up());
+      //j_stick_control_Y.whileHeld(new Cargo_Down());
+      // j_stick_control_A.whileHeld(new HatchPanel_Forward());
+      // j_stick_control_A.whenReleased(new HatchPanel_Backward());
+      j_stick_control_A.whenPressed(new PistonRetract());
+      j_stick_control_B.whenPressed(new PistonDeploy());
+      //j_stick_control_X.whileHeld(new Elevator_Up);
     }
 }
