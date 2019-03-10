@@ -8,19 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.DoubleSolenoid;      // Enumeration for double solenoid direction
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used for joystick buttons mapping
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;      // Enumeration for double solenoid direction
 import frc.robot.Robot;
 
-public class PistonDeploy extends Command {
+public class Piston_Retract extends Command {
   /**
    * Add your docs here.
    */
-  JoystickButton joyStickButton;
-
-  public PistonDeploy() {
+  public Piston_Retract() {
     requires(Robot.m_hatch_panel_subsystem);
   }
   
@@ -32,24 +26,24 @@ public class PistonDeploy extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.PistonDeploy();
+    Robot.m_hatch_panel_subsystem.Piston_Retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    end();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+      end();
   }
 }

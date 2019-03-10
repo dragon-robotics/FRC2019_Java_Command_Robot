@@ -24,7 +24,7 @@ public class HatchPanel_Forward extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.MoveForward();
+    Robot.m_hatch_panel_subsystem.Hatch_Move_Forward();
   }
 
   // Make this return true when this Command no longer needs to run execute()

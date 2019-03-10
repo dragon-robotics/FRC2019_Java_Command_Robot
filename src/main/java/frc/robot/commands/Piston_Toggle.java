@@ -10,14 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PistonRetract extends Command {
-  /**
-   * Add your docs here.
-   */
-  public PistonRetract() {
+public class Piston_Toggle extends Command {
+  public Piston_Toggle() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.m_hatch_panel_subsystem);
   }
-  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -26,13 +25,13 @@ public class PistonRetract extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.PistonRetract();
+    Robot.m_hatch_panel_subsystem.Piston_Toggle();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
@@ -44,6 +43,5 @@ public class PistonRetract extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      end();
   }
 }

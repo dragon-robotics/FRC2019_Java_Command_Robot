@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used fo
 import frc.robot.commands.Cargo_Up;
 import frc.robot.commands.Cargo_Down;
 import frc.robot.commands.HatchPanel_Forward;
-import frc.robot.commands.PistonDeploy;
-import frc.robot.commands.PistonRetract;
+import frc.robot.commands.Piston_Toggle;
+import frc.robot.commands.Piston_Deploy;
+import frc.robot.commands.Piston_Retract;
 import frc.robot.commands.HatchPanel_Backward;
 
 
@@ -84,8 +85,7 @@ public class OI {
       //j_stick_control_Y.whileHeld(new Cargo_Down());
       // j_stick_control_A.whileHeld(new HatchPanel_Forward());
       // j_stick_control_A.whenReleased(new HatchPanel_Backward());
-      j_stick_control_A.whenPressed(new PistonRetract());
-      j_stick_control_B.whenPressed(new PistonDeploy());
+      j_stick_control_A.whenPressed(new Piston_Toggle());
       //j_stick_control_X.whileHeld(new Elevator_Up);
     }
 }

@@ -8,15 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.DoubleSolenoid;      // Enumeration for double solenoid direction
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used for joystick buttons mapping
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;      // Enumeration for double solenoid direction
 import frc.robot.Robot;
 
-public class HatchPanel_Move extends Command {
-  public HatchPanel_Move() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class Piston_Deploy extends Command {
+  /**
+   * Add your docs here.
+   */
+
+  public Piston_Deploy() {
     requires(Robot.m_hatch_panel_subsystem);
   }
-
+  
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -25,24 +31,25 @@ public class HatchPanel_Move extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftJoyY = Robot.m_oi.j_stick_control.getRawAxis(1) / 2.8;
-    Robot.m_hatch_panel_subsystem.Hatch_Move(leftJoyY);
+    Robot.m_hatch_panel_subsystem.Piston_Deploy();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
