@@ -31,7 +31,7 @@ public class RobotMap {
 
   /* Joystick port */
   public static final int  J_STICK_DRIVER = 0;
-  public static final  int  J_STICK_CONTROL = 1;
+  public static final int  J_STICK_CONTROL = 1;
 
   /* Joystick */
   public static final int BUTTON_RIGHT = 5; 

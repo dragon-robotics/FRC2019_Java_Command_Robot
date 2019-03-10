@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Subsystems //
 import frc.robot.subsystems.DriveTrain_Subsystem;
+import frc.robot.subsystems.Elevator_Subsystem;
 import frc.robot.subsystems.Cargo_Subsystem;
 import frc.robot.subsystems.HatchPanel_Subsystem;
 import frc.robot.subsystems.Compressor_Subsystem;
@@ -29,10 +30,11 @@ import frc.robot.subsystems.Compressor_Subsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static final DriveTrain_Subsystem m_drivetrain_subsystem = new DriveTrain_Subsystem();
-  public static final Cargo_Subsystem m_cargo_subsystem = new Cargo_Subsystem();
-  public static final HatchPanel_Subsystem m_hatch_panel_subsystem = new HatchPanel_Subsystem();
-  public static final Compressor_Subsystem p_compressor_subsystem = new Compressor_Subsystem();
+  public static DriveTrain_Subsystem m_drivetrain_subsystem;
+  public static Cargo_Subsystem m_cargo_subsystem;
+  public static HatchPanel_Subsystem m_hatch_panel_subsystem;
+  public static Compressor_Subsystem p_compressor_subsystem;
+  public static Elevator_Subsystem m_elevator_subsystem;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -44,6 +46,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    m_drivetrain_subsystem = new DriveTrain_Subsystem();
+    m_cargo_subsystem = new Cargo_Subsystem();
+    m_hatch_panel_subsystem = new HatchPanel_Subsystem();
+    p_compressor_subsystem = new Compressor_Subsystem(); 
+    m_elevator_subsystem = new Elevator_Subsystem();   
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
