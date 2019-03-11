@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class HatchPanel_Move extends Command {
   public HatchPanel_Move() {
@@ -25,7 +26,7 @@ public class HatchPanel_Move extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftJoyY = Robot.m_oi.j_stick_control.getRawAxis(1) / 2.8;
+    double leftJoyY = Robot.m_oi.j_stick_control.getRawAxis(RobotMap.AXIS_LEFT_Y) / 2.8;
     Robot.m_hatch_panel_subsystem.Hatch_Move(leftJoyY);
   }
 

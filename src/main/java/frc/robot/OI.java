@@ -80,12 +80,10 @@ public class OI {
     public final JoystickButton j_stick_control_rightStick = new JoystickButton(j_stick_control, 10);  // Right-Stick button
 
     public OI(){
-
-      //j_stick_control_X.whileHeld(new Cargo_Up());
-      //j_stick_control_Y.whileHeld(new Cargo_Down());
-      // j_stick_control_A.whileHeld(new HatchPanel_Forward());
-      // j_stick_control_A.whenReleased(new HatchPanel_Backward());
+      //j_stick_control_B.whileHeld(new CargoShoot());
+      //j_stick_control_B.whileHeld(new CargoIntake());
       j_stick_control_A.whenPressed(new Piston_Toggle());
-      //j_stick_control_X.whileHeld(new Elevator_Up);
+      //j_stick_control_X.whileHeld(new Elevator_Up());
+      //j_stick_control_X.whileHeld(new Elevator_Down());
     }
 }

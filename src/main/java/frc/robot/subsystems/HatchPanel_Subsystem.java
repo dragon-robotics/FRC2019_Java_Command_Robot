@@ -20,6 +20,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;  // A CTRE library used f
 import frc.robot.RobotMap;
 import frc.robot.commands.HatchPanel_Move;
 
+
 /**
  * Add your docs here.
  */
