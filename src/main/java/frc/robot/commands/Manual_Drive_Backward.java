@@ -9,33 +9,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;                     // A WPI library used for timing robot operations
 
-public class ArcadeDrive extends Command {
-  public ArcadeDrive() {
+public class Manual_Drive_Backward extends Command {
+
+  private final Timer m_timer = new Timer();            // Generic timer
+
+  public Manual_Drive_Backward() {
     // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.m_drivetrain_subsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    m_timer.reset();  // Reset timer to 0
+    m_timer.start();  // Start the timer
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(1);
-    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(4);
-    boolean LB_Pressed = Robot.m_oi.j_stick_control_LB.get();
-    leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
-    rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
-    Robot.m_drivetrain_subsystem.TeleopDrive(leftJoyY, rightJoyX);
+    Robot.m_drivetrain_subsystem.TankDrive(-0.3, -0.3);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(m_timer.get() < 0.2){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   // Called once after isFinished returns true

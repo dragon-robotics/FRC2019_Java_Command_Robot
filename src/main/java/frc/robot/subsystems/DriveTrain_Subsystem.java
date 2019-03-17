@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.Arcade_Drive;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -36,14 +36,19 @@ public class DriveTrain_Subsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ArcadeDrive());
+    setDefaultCommand(new Arcade_Drive());
   }
 
   public void TeleopDrive(double leftJoyY, double rightJoyX){
     m_robotDrive.arcadeDrive(leftJoyY, rightJoyX);
   }
 
+  public void TankDrive(double leftJoyY, double rightJoyX){
+    m_robotDrive.tankDrive(leftJoyY, rightJoyX);
+  }
+
   public void Stop(){
     m_robotDrive.arcadeDrive(0, 0); // Stops the robot
+    m_robotDrive.tankDrive(0, 0); // Stops the robot
   }
 }

@@ -8,16 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-public class Piston_Retract extends Command {
-  /**
-   * Add your docs here.
-   */
-  public Piston_Retract() {
-    requires(Robot.m_hatch_panel_subsystem);
+public class Tank_Drive extends Command {
+  public Tank_Drive() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
-  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -26,13 +23,12 @@ public class Piston_Retract extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.Piston_Retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -44,6 +40,5 @@ public class Piston_Retract extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      isFinished();
   }
 }
