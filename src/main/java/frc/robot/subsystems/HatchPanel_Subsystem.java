@@ -44,28 +44,24 @@ public class HatchPanel_Subsystem extends Subsystem {
       doubleSolenoid_Hatch.set(Value.kForward); // Hatch solenoid go forward
     }
     else{
-      doubleSolenoid_Hatch.set(Value.kReverse); // Hatch solenoid go forward
+      doubleSolenoid_Hatch.set(Value.kReverse); // Hatch solenoid go backward
     }
   }
 
   public void Piston_Deploy(){
-    doubleSolenoid_Hatch.set(Value.kForward); // Hatch solenoid go forward
+    doubleSolenoid_Hatch.set(Value.kForward); // Move pistons forward
   }
   
   public void Piston_Retract() {
-    doubleSolenoid_Hatch.set(Value.kReverse); // Hatch solenoid go forward
+    doubleSolenoid_Hatch.set(Value.kReverse); // Move pistons backward
+  }
+
+  public void Piston_Stop(){
+    doubleSolenoid_Hatch.set(Value.kOff); // Stops pistons
   }
 
   public void Hatch_Move(double moveSpeed){
     HatchPanel.set(moveSpeed);
-  }
-
-  public void Hatch_Move_Forward(){
-    HatchPanel.set(0.75);
-  }
-
-  public void Hatch_Move_Backward(){
-    HatchPanel.set(-0.75);
   }
 
   public void Stop(){

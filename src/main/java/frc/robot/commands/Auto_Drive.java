@@ -31,7 +31,11 @@ public class Auto_Drive extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    addSequential(new Manual_Drive_Forward());
+    // Choose time and speed for robot to drive forward //
+    double forwardTime = 1;
+    double forwardSpeed = 0.4;
+
+    addSequential(new Manual_Drive_Forward(forwardTime, forwardSpeed));
     addSequential(new Arcade_Drive());
   }
 }

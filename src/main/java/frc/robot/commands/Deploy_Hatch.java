@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 
 public class Deploy_Hatch extends CommandGroup {
   /**
@@ -31,11 +33,37 @@ public class Deploy_Hatch extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
    
-   /* addSequential(new drive_bot)
-    moveback 5secs
-    movehatch forward
-    deploy pistons
-    pull back pistons
-    moveback 5secs*/
+   /* 
+    - Pseudocode
+      1. moveback 1secs
+      2. movehatch forward
+      3. deploy pistons
+      4. wait for a little bit
+      5. pull back pistons
+      6. movehatch back
+    */
+
+    /* Change these variables here for changing the amount of time (in seconds) */
+    // Move backward speed + time //
+    double driveBackwardTime = 0.2;
+    double driveBackwardSpeed = 0.5;
+
+    // Foward hatch moving speed + time //
+    double hatchForwardTime = 0.2;
+    double hatchForwardSpeed = 0.5;
+
+    // Retract piston wait time //
+    double waitTime = 0.5;
+
+    // Backward hatch moving speed + time //
+    double hatchBackwardTime = 0.2;
+    double hatchBackwardSpeed = 0.5;
+
+    addSequential(new Manual_Drive_Backward(driveBackwardTime, driveBackwardSpeed));
+    addSequential(new HatchPanel_Forward(hatchForwardTime, hatchForwardSpeed));
+    addSequential(new Piston_Deploy());
+    addSequential(new WaitCommand(waitTime));
+    addSequential(new Piston_Retract());
+    addSequential(new HatchPanel_Forward(hatchBackwardTime, hatchBackwardSpeed));
   }
 }

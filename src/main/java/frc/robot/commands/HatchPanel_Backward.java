@@ -7,14 +7,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class HatchPanel_Backward extends Command {
-  public HatchPanel_Backward() {
+public class HatchPanel_Backward extends TimedCommand {
+
+  public double moveSpeed;
+
+  public HatchPanel_Backward(double time, double moveSpeed) {
+    super(time);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_hatch_panel_subsystem);
+
+    this.moveSpeed = -moveSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -25,13 +31,7 @@ public class HatchPanel_Backward extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.Hatch_Move_Backward();
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
+    Robot.m_hatch_panel_subsystem.Hatch_Move(moveSpeed);
   }
 
   // Called once after isFinished returns true

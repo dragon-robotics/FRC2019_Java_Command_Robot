@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class Arcade_Drive extends Command {
   public Arcade_Drive() {
@@ -24,8 +25,8 @@ public class Arcade_Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(1);
-    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(4);
+    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_LEFT_Y);
+    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_RIGHT_X);
     boolean LB_Pressed = Robot.m_oi.j_stick_control_LB.get();
     leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
     rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
