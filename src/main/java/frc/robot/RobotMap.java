@@ -26,7 +26,7 @@ public class RobotMap {
   public static final int MOTOR_RIGHTREAR = 1;
 
   /* TalonSRX */
-  public static final int TALONSRX_CARGO = 1;
+  public static final int TALONSRX_ELEVATOR = 1;
   public static final int TALONSRX_HATCH = 2;
 
   /* Joystick port */
@@ -44,6 +44,13 @@ public class RobotMap {
   public static final int BUTTON_START = 8;
   public static final int BUTTON_LEFTSTICK = 9;
   public static final int BUTTON_RIGHTSTICK = 10;
+
+  public static final int AXIS_LEFT_X = 0;
+  public static final int AXIS_LEFT_Y = 1;
+  public static final int AXIS_LEFT_TRIGGER = 2;
+  public static final int AXIS_RIGHT_TRIGGER = 3;
+  public static final int AXIS_RIGHT_X = 4;
+  public static final int AXIS_RIGHT_Y = 5;
 
   /* Pneumatics */
   public static final int CAN_COMPRESSOR = 0;

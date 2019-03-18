@@ -10,14 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Piston_Retract extends Command {
-  /**
-   * Add your docs here.
-   */
-  public Piston_Retract() {
-    requires(Robot.m_hatch_panel_subsystem);
+public class Arcade_Drive extends Command {
+  public Arcade_Drive() {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.m_drivetrain_subsystem);
   }
-  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -26,13 +24,18 @@ public class Piston_Retract extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.Piston_Retract();
+    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(1);
+    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(4);
+    boolean LB_Pressed = Robot.m_oi.j_stick_control_LB.get();
+    leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
+    rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
+    Robot.m_drivetrain_subsystem.TeleopDrive(leftJoyY, rightJoyX);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -44,6 +47,5 @@ public class Piston_Retract extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      isFinished();
   }
 }

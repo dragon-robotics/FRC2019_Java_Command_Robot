@@ -9,30 +9,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.Timer;                     // A WPI library used for timing robot operations
 
-public class Piston_Retract extends Command {
-  /**
-   * Add your docs here.
-   */
-  public Piston_Retract() {
-    requires(Robot.m_hatch_panel_subsystem);
+public class Manual_Drive_Forward extends Command {
+
+  private final Timer m_timer = new Timer();            // Generic timer
+
+  public Manual_Drive_Forward() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_drivetrain_subsystem);
   }
-  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    m_timer.reset();  // Reset timer to 0
+    m_timer.start();  // Start the timer
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.Piston_Retract();
+     Robot.m_drivetrain_subsystem.TankDrive(0.5, 0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    if(m_timer.get() < 1){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   // Called once after isFinished returns true
@@ -44,6 +54,6 @@ public class Piston_Retract extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      isFinished();
+    end();
   }
 }

@@ -9,15 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class Piston_Retract extends Command {
-  /**
-   * Add your docs here.
-   */
-  public Piston_Retract() {
-    requires(Robot.m_hatch_panel_subsystem);
+public class Elevator_Move extends Command {
+  public Elevator_Move() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_elevator_subsystem);
   }
-  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -26,13 +26,31 @@ public class Piston_Retract extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch_panel_subsystem.Piston_Retract();
+    double leftTriggerValue = Robot.m_oi.j_stick_control.getRawAxis(RobotMap.AXIS_LEFT_TRIGGER);
+    double rightTriggerValue = Robot.m_oi.j_stick_control.getRawAxis(RobotMap.AXIS_RIGHT_TRIGGER);
+
+    if(leftTriggerValue > 0 && rightTriggerValue > 0){
+      // Do nothing
+      Robot.m_elevator_subsystem.Elevator_Move(0);
+    }
+    else if(rightTriggerValue > 0){
+      // Move in the positive direction based on the right trigger percentage
+      Robot.m_elevator_subsystem.Elevator_Move(rightTriggerValue);
+    }
+    else if(leftTriggerValue > 0){
+      // Move in the negative direction based on the left trigger percentage
+      Robot.m_elevator_subsystem.Elevator_Move(-leftTriggerValue);
+    }
+    else{
+      // Stop elevator motor
+      Robot.m_elevator_subsystem.Elevator_Move(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -44,6 +62,5 @@ public class Piston_Retract extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-      isFinished();
   }
 }

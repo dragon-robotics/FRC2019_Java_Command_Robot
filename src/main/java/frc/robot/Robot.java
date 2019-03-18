@@ -12,9 +12,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-/* For Camera Operations */
 import edu.wpi.first.cameraserver.CameraServer;
+
+// Commands //
+import frc.robot.commands.Arcade_Drive;
+import frc.robot.commands.Auto_Drive;
+
 
 // Subsystems //
 import frc.robot.subsystems.DriveTrain_Subsystem;
@@ -53,7 +56,7 @@ public class Robot extends TimedRobot {
     p_compressor_subsystem = new Compressor_Subsystem(); 
     m_elevator_subsystem = new Elevator_Subsystem();   
     m_oi = new OI();
-    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    m_chooser.setDefaultOption("Default Auto", new Auto_Drive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -100,15 +103,23 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    // m_autonomousCommand = m_chooser.getSelected();
 
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
+    
+    String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); 
+     
+    switch(autoSelected) { 
+      case "Manual Drive Forward": 
+        m_autonomousCommand = new Auto_Drive();
+        break; 
+      case "Arcade Drive":
+        m_autonomousCommand = new Auto_Drive();
+        break;
+      default: 
+        m_autonomousCommand = new Auto_Drive();
+        break;
+    }
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
