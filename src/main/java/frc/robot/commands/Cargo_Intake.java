@@ -10,17 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class Cargo_Shoot extends TimedCommand {
+public class Cargo_Intake extends TimedCommand {
   
   public double moveSpeed;
 
-  public Cargo_Shoot(double time, double moveSpeed) {
+  public Cargo_Intake(double time, double moveSpeed) {
     super(time);
 
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_cargo_subsystem);
     
-    this.moveSpeed = moveSpeed;
+    this.moveSpeed = -moveSpeed;
   }
 
   // Called just before this Command runs the first time

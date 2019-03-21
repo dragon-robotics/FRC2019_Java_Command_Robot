@@ -21,7 +21,7 @@ import frc.robot.commands.Cargo_Stop;
 public class Cargo_Subsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final WPI_TalonSRX Cargo = new WPI_TalonSRX(RobotMap.TALONSRX_ELEVATOR);
+  private final WPI_TalonSRX Cargo = new WPI_TalonSRX(RobotMap.TALONSRX_CARGO);
 
   @Override
   public void initDefaultCommand() {
@@ -34,6 +34,9 @@ public class Cargo_Subsystem extends Subsystem {
 
   public void CargoIntake(){
     Cargo.set(-1);
+  }
+  public void CargoMove(double moveSpeed){
+    Cargo.set(moveSpeed);
   }
 
   public void Stop(){

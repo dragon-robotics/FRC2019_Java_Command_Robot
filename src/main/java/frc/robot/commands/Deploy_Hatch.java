@@ -45,10 +45,10 @@ public class Deploy_Hatch extends CommandGroup {
     /* Change these variables here for changing the amount of time (in seconds) */
     // Move backward speed + time //
     double driveBackwardTime = 0.2;
-    double driveBackwardSpeed = 0.5;
+    double driveBackwardSpeed = -0.5;
 
     // Foward hatch moving speed + time //
-    double hatchForwardTime = 0.2;
+    double hatchForwardTime = 0.05;
     double hatchForwardSpeed = 0.5;
 
     // Retract piston wait time //
