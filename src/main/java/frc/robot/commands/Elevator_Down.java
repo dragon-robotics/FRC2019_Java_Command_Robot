@@ -7,13 +7,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class Cargo_Up extends Command {
-  public Cargo_Up() {
+public class Elevator_Down extends TimedCommand {
+
+  private double moveSpeed;
+
+  public Elevator_Down(double time, double moveSpeed) {
+    super(time);
+    
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_cargo_subsystem);
+    requires(Robot.m_elevator_subsystem);
+
+    this.moveSpeed = -moveSpeed;
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +31,7 @@ public class Cargo_Up extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  //  Robot.m_cargo_subsystem.MoveCargoUp();
+    Robot.m_elevator_subsystem.Elevator_Move(moveSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

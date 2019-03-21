@@ -10,11 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used for joystick buttons mapping
 
-import frc.robot.commands.Cargo_Up;
+import frc.robot.commands.Elevator_Up;
 import frc.robot.commands.Deploy_Cargo;
 import frc.robot.commands.Deploy_Hatch;
 import frc.robot.commands.Elevator_Move;
-import frc.robot.commands.Cargo_Down;
+import frc.robot.commands.Elevator_Down;
 import frc.robot.commands.HatchPanel_Forward;
 import frc.robot.commands.Piston_Toggle;
 import frc.robot.commands.Piston_Deploy;

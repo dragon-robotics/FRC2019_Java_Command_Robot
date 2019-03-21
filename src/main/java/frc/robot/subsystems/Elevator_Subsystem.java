@@ -32,14 +32,6 @@ public class Elevator_Subsystem extends Subsystem {
     Elevator.set(moveSpeed);
   }
 
-  public void Elevator_Up(){
-    Elevator.set(1);
-  } 
-  
-  public void Elevator_Down(){
-    Elevator.set(-1);
-  }
-
   public void Elevator_Stop(){
     Elevator.set(0);
   }

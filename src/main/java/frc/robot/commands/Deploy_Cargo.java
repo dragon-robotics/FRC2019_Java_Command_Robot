@@ -19,22 +19,18 @@ public class Deploy_Cargo extends CommandGroup {
     move elevator up 3 secs
     shoot cargo 
     move elevator down 3 secs*/
-    double driveBackwardTime = 0.2;
-    double driveBackwardSpeed = -0.5;  
     
-    double CargoupTime = 0.05;
-    double CargoupSpeed = 0.5;
+    double ElevatorUpTime = 3;
+    double ElevatorUpSpeed = 1;
 
-    double CargodownTime = 0.05;
-    double CargodownSpeed = 0.5;
+    double ElevatorDownTime = 3;
+    double ElevatorDownSpeed = 1;
 
-    double CargooutTime = 0.2;
-    double CargooutSpeed = 0.5;
+    double CargoShootTime = 0.2;
+    double CargoShootSpeed = 1;
 
-    double CargoinTime = 0.2;
-    double CargoinSpeed = 0.5;
-
-    addSequential(new Cargo_Shoot(CargooutTime, CargooutSpeed));
-    addSequential(new Cargo_Intake(CargoinTime, CargoinSpeed));
+    addSequential(new Elevator_Up(ElevatorUpTime, ElevatorUpSpeed));
+    addSequential(new Cargo_Shoot(CargoShootTime, CargoShootSpeed));
+    addSequential(new Elevator_Down(ElevatorDownTime, ElevatorDownSpeed));
   }
 }
