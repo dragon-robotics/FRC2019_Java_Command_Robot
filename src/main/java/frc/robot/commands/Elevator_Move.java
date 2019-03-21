@@ -43,7 +43,7 @@ public class Elevator_Move extends Command {
     }
     else{
       // Stop elevator motor
-      Robot.m_elevator_subsystem.Elevator_Move(0);
+      Robot.m_elevator_subsystem.Elevator_Stop();
     }
   }
 
