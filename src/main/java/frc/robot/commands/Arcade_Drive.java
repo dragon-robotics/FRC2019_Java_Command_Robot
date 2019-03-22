@@ -25,12 +25,15 @@ public class Arcade_Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    boolean LB_Pressed = Robot.m_oi.j_stick_driver_LB.get();
+    boolean RB_Pressed = Robot.m_oi.j_stick_driver_LB.get();
+    
     double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_LEFT_Y);
     double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_RIGHT_X);
-    boolean LB_Pressed = Robot.m_oi.j_stick_control_LB.get();
+    int flipped = RB_Pressed ? -1 : 1;  // 1 for normal, 1 for flipped
     leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
     rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
-    Robot.m_drivetrain_subsystem.TeleopDrive(leftJoyY, rightJoyX);
+    Robot.m_drivetrain_subsystem.TeleopDrive(leftJoyY * flipped, rightJoyX);
   }
 
   // Make this return true when this Command no longer needs to run execute()

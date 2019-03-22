@@ -31,15 +31,15 @@ public class Elevator_Move extends Command {
 
     if(leftTriggerValue > 0 && rightTriggerValue > 0){
       // Do nothing
-      Robot.m_elevator_subsystem.Elevator_Move(0);
+      Robot.m_elevator_subsystem.Elevator_Stop();
     }
     else if(rightTriggerValue > 0){
       // Move in the positive direction based on the right trigger percentage
-      Robot.m_elevator_subsystem.Elevator_Move(rightTriggerValue);
+      Robot.m_elevator_subsystem.Elevator_Move(-rightTriggerValue);
     }
     else if(leftTriggerValue > 0){
       // Move in the negative direction based on the left trigger percentage
-      Robot.m_elevator_subsystem.Elevator_Move(-leftTriggerValue);
+      Robot.m_elevator_subsystem.Elevator_Move(leftTriggerValue);
     }
     else{
       // Stop elevator motor

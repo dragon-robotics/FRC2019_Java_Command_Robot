@@ -26,7 +26,8 @@ public class HatchPanel_Move extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftJoyY = Robot.m_oi.j_stick_control.getRawAxis(RobotMap.AXIS_LEFT_Y) / 2.8;
+    double leftJoyY = Robot.m_oi.j_stick_control.getRawAxis(RobotMap.AXIS_LEFT_Y);
+    leftJoyY = leftJoyY > 0 ? leftJoyY * 0.8 : leftJoyY * 0.4;
     Robot.m_hatch_panel_subsystem.Hatch_Move(leftJoyY);
   }
 
