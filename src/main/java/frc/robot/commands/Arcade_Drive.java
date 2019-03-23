@@ -26,9 +26,9 @@ public class Arcade_Drive extends Command {
   @Override
   protected void execute() {
     boolean LB_Pressed = Robot.m_oi.j_stick_driver_LB.get();
-    boolean RB_Pressed = Robot.m_oi.j_stick_driver_LB.get();
+    boolean RB_Pressed = Robot.m_oi.j_stick_driver_RB.get();
     
-    double leftJoyY = -Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_LEFT_Y);
+    double leftJoyY = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_LEFT_Y);
     double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_RIGHT_X);
     int flipped = RB_Pressed ? -1 : 1;  // 1 for normal, 1 for flipped
     leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;

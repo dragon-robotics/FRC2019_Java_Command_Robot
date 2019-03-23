@@ -86,9 +86,9 @@ public class OI {
       //j_stick_control_X.whileHeld(new Cargo_Shoot());
 
       j_stick_control_A.whenPressed(new Piston_Toggle());
-      j_stick_control_B.whenPressed(new Deploy_Hatch());
-      j_stick_control_Y.whenPressed(new Deploy_Cargo());
-       j_stick_control_X.whileHeld(new Elevator_Move());
+      // j_stick_control_B.whenPressed(new Deploy_Hatch());
+      // j_stick_control_Y.whenPressed(new Deploy_Cargo());
+      // j_stick_control_X.whileHeld(new Elevator_Move());
 
     }
 }

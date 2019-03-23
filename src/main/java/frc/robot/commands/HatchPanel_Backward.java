@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class HatchPanel_Backward extends TimedCommand {
 
-  public double moveSpeed;
+  private double moveSpeed;
 
   public HatchPanel_Backward(double time, double moveSpeed) {
     super(time);

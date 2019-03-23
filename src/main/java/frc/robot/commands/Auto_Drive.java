@@ -35,7 +35,7 @@ public class Auto_Drive extends CommandGroup {
     double forwardTime = 1;
     double forwardSpeed = 0.4;
 
-    addSequential(new Manual_Drive_Forward(forwardTime, forwardSpeed));
+    // addSequential(new Manual_Drive_Forward(forwardTime, forwardSpeed));
     addSequential(new Arcade_Drive());
   }
 }

@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class Cargo_Intake extends TimedCommand {
   
-  public double moveSpeed;
+  private double moveSpeed;
 
   public Cargo_Intake(double time, double moveSpeed) {
     super(time);

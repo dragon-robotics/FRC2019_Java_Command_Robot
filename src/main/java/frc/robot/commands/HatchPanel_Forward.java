@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class HatchPanel_Forward extends TimedCommand {
   
-  public double moveSpeed;
+  private double moveSpeed;
 
   public HatchPanel_Forward(double time, double moveSpeed) {
     super(time);
