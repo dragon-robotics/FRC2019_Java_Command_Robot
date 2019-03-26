@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;       // A CTRE library used f
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;  // A CTRE library used for TalonSRX control using CAN protocol
 
 import frc.robot.RobotMap;
+import frc.robot.commands.Cargo_In_Out;
 import frc.robot.commands.Cargo_Stop;
 
 /**
@@ -26,7 +27,7 @@ public class Cargo_Subsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Cargo_Stop());
+    setDefaultCommand(new Cargo_In_Out());
   }
   public void CargoShoot(){
     Cargo.set(1);

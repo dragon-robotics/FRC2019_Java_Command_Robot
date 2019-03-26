@@ -69,7 +69,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     /* Start camera capture */
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
+    new Thread(() -> {
+      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      //camera.setResolution(320, 240);
+      //camera.setFPS(30);
+
+      CameraServer.getInstance().startAutomaticCapture();
+    }).start();
   }
 
   /**
