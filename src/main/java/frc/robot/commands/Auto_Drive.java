@@ -37,5 +37,31 @@ public class Auto_Drive extends CommandGroup {
 
     // addSequential(new Manual_Drive_Forward(forwardTime, forwardSpeed));
     addSequential(new Arcade_Drive());
+
+    /* (RIGHT SIDE LEVEL 2) Move Backwards for .7 seconds at half speed
+    move backwards for 2 seconds at full speed 
+    do a 90 degree turn torwards the right
+    make sure we are alligned with the limelight
+    deploy pistons out
+    do a 100 degree turn to the  left
+    go forward for 1.5 seconds full to get the ball
+    intake the ball
+    move backwards for 1.7 seconds full speed
+    do a a 90 degree turn to the right
+    move the elevator up at full speed for x second( x= appropriate height)
+    outtake cargo*/
+
+    /* (Left side  SIDE LEVEL 2) Move Backwards for .7 seconds at half speed
+    move backwards for 2 seconds at full speed 
+    do a 90 degree turn torwards the left
+    make sure we are alligned with the limelight
+    deploy pistons out
+    do a 100 degree turn to the  right
+    go forward for 1.5 seconds full to get the ball
+    intake the ball
+    move backwards for 1.7 seconds full speed
+    do a a 90 degree turn to the left
+    move the elevator up at full speed for x second( x= appropriate height)
+    outtake cargo*/
   }
 }
