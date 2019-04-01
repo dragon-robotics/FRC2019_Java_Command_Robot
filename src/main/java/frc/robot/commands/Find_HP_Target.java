@@ -7,25 +7,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class Tank_Drive extends TimedCommand {
+public class Find_HP_Target extends Command {
 
-  private double time;
-  private double left_drive;
-  private double right_drive;
+  private int direction;
 
-  public Tank_Drive(double time, double left_drive, double right_drive) {
-    super(time);
-
+  public Find_HP_Target(int direction) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.m_limelight_camera_subsystem);
     requires(Robot.m_drivetrain_subsystem);
 
-    this.left_drive = left_drive;
-    this.right_drive = right_drive;
+    this.direction = direction;
   }
 
   // Called just before this Command runs the first time
@@ -36,7 +31,24 @@ public class Tank_Drive extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drivetrain_subsystem.TankDrive(left_drive, right_drive);
+    /* Rotate the robot until target is valid depending on the direction */
+    if(direction < 1){
+      Robot.m_drivetrain_subsystem.TankDrive(-1, 1);
+    }
+    else{
+      Robot.m_drivetrain_subsystem.TankDrive(1, -1);
+    }
+  }
+
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    if(true){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   // Called once after isFinished returns true
@@ -48,6 +60,5 @@ public class Tank_Drive extends TimedCommand {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

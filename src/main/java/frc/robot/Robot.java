@@ -33,6 +33,7 @@ import frc.robot.subsystems.Elevator_Subsystem;
 import frc.robot.subsystems.Cargo_Subsystem;
 import frc.robot.subsystems.HatchPanel_Subsystem;
 import frc.robot.subsystems.Compressor_Subsystem;
+import frc.robot.subsystems.Limelight_Camera_Subsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,6 +48,7 @@ public class Robot extends TimedRobot {
   public static HatchPanel_Subsystem m_hatch_panel_subsystem;
   public static Compressor_Subsystem p_compressor_subsystem;
   public static Elevator_Subsystem m_elevator_subsystem;
+  public static Limelight_Camera_Subsystem m_limelight_camera_subsystem;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -62,21 +64,12 @@ public class Robot extends TimedRobot {
     m_cargo_subsystem = new Cargo_Subsystem();
     m_hatch_panel_subsystem = new HatchPanel_Subsystem();
     p_compressor_subsystem = new Compressor_Subsystem(); 
-    m_elevator_subsystem = new Elevator_Subsystem();   
+    m_elevator_subsystem = new Elevator_Subsystem();
+    m_limelight_camera_subsystem = new Limelight_Camera_Subsystem();   
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new Auto_Drive());
+    m_chooser.setDefaultOption("Default Auto", new Arcade_Drive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-
-    /* Start camera capture */
-    //CameraServer.getInstance().startAutomaticCapture();
-    new Thread(() -> {
-      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      //camera.setResolution(320, 240);
-      //camera.setFPS(30);
-
-      CameraServer.getInstance().startAutomaticCapture();
-    }).start();
   }
 
   /**
@@ -119,19 +112,31 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // m_autonomousCommand = m_chooser.getSelected();
-
+    String autoSelected = SmartDashboard.getString("Auto Selector", "Right Side Auto Lvl2"); 
     
-    String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); 
-     
+    /* Direction */
+    int LEFT = 1;
+    int RIGHT = 0;
+
+    /* Starting Level */
+    int LEVEL_ONE = 1;
+    int LEVEL_TWO = 2;
+
     switch(autoSelected) { 
-      case "Manual Drive Forward": 
-        m_autonomousCommand = new Auto_Drive();
+      case "Right Side Auto Lvl2": 
+        m_autonomousCommand = new Auto_Drive(LEVEL_TWO, RIGHT);
         break; 
-      case "Arcade Drive":
-        m_autonomousCommand = new Auto_Drive();
+      case "Left Side Auto Lvl2":
+        m_autonomousCommand = new Auto_Drive(LEVEL_TWO, LEFT);
         break;
-      default: 
-        m_autonomousCommand = new Auto_Drive();
+      case "Right Side Auto Lvl1":
+        m_autonomousCommand = new Auto_Drive(LEVEL_ONE, RIGHT);
+        break;
+      case "Left Side Auto Lvl1":
+        m_autonomousCommand = new Auto_Drive(LEVEL_ONE, LEFT);
+        break;
+      default:
+        m_autonomousCommand = new Arcade_Drive();
         break;
     }
     
@@ -158,25 +163,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    new Thread(() -> {
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      camera.setResolution(160, 120);
-      camera.setFPS(30);
-      camera.setConnectionStrategy(ConnectionStrategy.kKeepOpen);
-
-      CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSource outputStream = CameraServer.getInstance().putVideo("USB Camera 0", 160, 120);
-      
-      Mat source = new Mat();
-      Mat output = new Mat();
-      
-      while(!Thread.interrupted()) {
-          cvSink.grabFrame(source);
-          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-          outputStream.putFrame(output);
-      }
-  }).start();
   }
 
   /**

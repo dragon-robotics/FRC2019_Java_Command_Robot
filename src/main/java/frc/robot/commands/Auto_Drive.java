@@ -13,7 +13,7 @@ public class Auto_Drive extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Auto_Drive() {
+  public Auto_Drive(int level, int direction) {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -31,12 +31,42 @@ public class Auto_Drive extends CommandGroup {
     // a CommandGroup containing them would require both the chassis and the
     // arm.
 
-    // Choose time and speed for robot to drive forward //
-    double forwardTime = 1;
-    double forwardSpeed = 0.4;
+    
 
-    // addSequential(new Manual_Drive_Forward(forwardTime, forwardSpeed));
-    addSequential(new Arcade_Drive());
+    // Choose time and speed for robot to drive forward //
+    double forward_time = 1;
+    double forward_speed = 1;
+
+    if(level == 1){
+      double lvl2_forward_time = 0.5;
+      double lvl2_forward_speed = 0.8;
+      addSequential(new Manual_Drive_Forward(lvl2_forward_time, lvl2_forward_speed));
+    }
+    
+    addSequential(new Manual_Drive_Forward(forward_time, forward_speed));
+    
+    /* Drive path to the 
+        Left     Right
+          |        |
+          |        |
+          \        /
+           \      /
+           |      |
+           |      |
+    ===============================
+    */
+
+    double steering_time = 0.5;
+    double drive_time = 1;
+    double steer_amount = 0.5;
+
+    addSequential(new Tank_Drive(drive_time, 1, 1));
+    addSequential(new Tank_Drive(steering_time, 1 - (direction * steer_amount), steer_amount + (direction * steer_amount)));
+    addSequential(new Tank_Drive(steering_time, steer_amount + (direction * steer_amount), 1 - (direction * steer_amount)));
+    addSequential(new Tank_Drive(drive_time, 1, 1));
+
+    /* Find the HP target */
+    addSequential(new Find_HP_Target(direction));
 
     /* (RIGHT SIDE LEVEL 2) Move Backwards for .7 seconds at half speed
     move backwards for 2 seconds at full speed 
