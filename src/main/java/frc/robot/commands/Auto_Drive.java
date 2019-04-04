@@ -67,6 +67,9 @@ public class Auto_Drive extends CommandGroup {
 
     /* Find the HP target */
     addSequential(new Find_HP_Target(direction));
+    addSequential(new Drive_To_HP_Target());
+    addSequential(new Piston_Deploy());
+    addSequential(new Manual_Drive_Backward(0.3, 1));
 
     /* (RIGHT SIDE LEVEL 2) Move Backwards for .7 seconds at half speed
     move backwards for 2 seconds at full speed 

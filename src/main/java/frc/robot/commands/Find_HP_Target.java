@@ -43,7 +43,7 @@ public class Find_HP_Target extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(true){
+    if(Robot.m_limelight_camera_subsystem.Find_Target() == 1){
       return true;
     }
     else{
