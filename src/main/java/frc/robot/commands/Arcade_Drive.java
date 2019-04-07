@@ -33,7 +33,7 @@ public class Arcade_Drive extends Command {
     int flipped = RB_Pressed ? -1 : 1;  // 1 for normal, 1 for flipped
     leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
     rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
-    Robot.m_drivetrain_subsystem.TeleopDrive(leftJoyY * flipped, rightJoyX);
+    Robot.m_drivetrain_subsystem.ArcadeDrive(leftJoyY * flipped, rightJoyX);
   }
 
   // Make this return true when this Command no longer needs to run execute()

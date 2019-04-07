@@ -7,26 +7,27 @@
 
 package frc.robot.commands;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.libraries.MovingAverage;
 
 public class Drive_To_HP_Target extends Command {
 
-  private static final double STEER_P = 0.03;
-  private static final double STEER_I = 0;
-  private static final double STEER_D = 0;
-  private static final double DRIVE_P = 0.26;
-  private static final double DRIVE_I = 0;
-  private static final double DRIVE_D = 0;
+  private static final double STEER_kP = 0.03;
+  private static final double STEER_kI = 0;
+  private static final double STEER_kD = 0;
+  private static final double DRIVE_kP = 0.26;
+  private static final double DRIVE_kI = 0;
+  private static final double DRIVE_kD = 0;
   private static final double DESIRED_TARGET_AREA = 13.0;
+  private static final double DESIRED_TARGET_STEER_ANGLE = 0;
   private static final double MAX_DRIVE = 0.7;
   
-  private static double error, prev_error = 0, i_error, d_error;
+  private static double drive_error, prev_drive_error = 0, i_drive_error, d_drive_error;
+  private static double steer_error, prev_steer_error = 0, i_steer_error, d_steer_error;
   private static final int MOVING_AVG_SIZE = 4;
-  private static Queue<Double> moving_avg_list = new LinkedList<>();
+  private static MovingAverage drive_moving_avg_list = new MovingAverage(MOVING_AVG_SIZE);
+  private static MovingAverage steer_moving_avg_list = new MovingAverage(MOVING_AVG_SIZE);
 
   public Drive_To_HP_Target() {
     // Use requires() here to declare subsystem dependencies
@@ -43,42 +44,40 @@ public class Drive_To_HP_Target extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double tv = Robot.m_limelight_camera_subsystem.Find_Target();
+    // boolean tv = Robot.m_limelight_camera_subsystem.Find_Target();
     double tx = Robot.m_limelight_camera_subsystem.Get_X();
-    double ty = Robot.m_limelight_camera_subsystem.Get_Y();
+    // double ty = Robot.m_limelight_camera_subsystem.Get_Y();
     double ta = Robot.m_limelight_camera_subsystem.Get_Area();
 
     /* PID for driving to HP Target */
+    drive_moving_avg_list.addToMovingAverage(ta);
+    steer_moving_avg_list.addToMovingAverage(tx);
 
-    // if(moving_avg_list.size() < MOVING_AVG_SIZE){
-    //   moving_avg_list.add(tx);
-    // }
-    // else{
-    //   moving_avg_list.remove();
-    //   moving_avg_list.add(tx);
-    // }
+    double drive_moving_average = drive_moving_avg_list.getMovingAverage();
+    double steer_moving_average = steer_moving_avg_list.getMovingAverage();
+
+    // Start with PID steering //
+    steer_error = (DESIRED_TARGET_STEER_ANGLE - steer_moving_average) / 27; // Scale +-27 deg FOV to +-1 for steering command
+    d_steer_error = steer_error - prev_steer_error;
+    i_steer_error += steer_error;
+    double steer_cmd = (STEER_kP * steer_error) + (STEER_kI * i_steer_error) + (STEER_kD * d_steer_error);
+
     
-    // double moving_sum = 0;
-    // for(double value : moving_avg_list){
-    //   moving_sum += value;
-    // }
-    // double moving_average = moving_sum / moving_avg_list.size();
-    // error = moving_average / 27;  // Needs to be divided by 27 because 27 degrees is the max FOV and we need to scale the error from 1 to -1 for steering.
-    // d_error = error - prev_error;
-    // i_error += error;
+    // try to drive forward using PID until the target area reaches our desired area //
+    drive_error = DESIRED_TARGET_AREA - drive_moving_average;
+    d_drive_error = drive_error - prev_drive_error;
+    i_drive_error += drive_error;
+    double drive_cmd = (DRIVE_kP * drive_error) + (DRIVE_kI * i_drive_error) + (DRIVE_kD * d_drive_error);
 
-    // Start with proportional steering
-    double steer_cmd = tx * STEER_P;
-
-    // try to drive forward until the target area reaches our desired area
-    double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_P;
+    prev_drive_error = drive_error;
+    prev_steer_error = steer_error;
 
     // don't let the robot drive too fast into the goal
-    if (drive_cmd > MAX_DRIVE) {
-      drive_cmd = MAX_DRIVE;
-    }
+    // if (drive_cmd > MAX_DRIVE) {
+    //   drive_cmd = MAX_DRIVE;
+    // }
 
-    Robot.m_drivetrain_subsystem.TeleopDrive(drive_cmd, steer_cmd);
+    Robot.m_drivetrain_subsystem.ArcadeDrive(drive_cmd, steer_cmd);
   }
 
   // Make this return true when this Command no longer needs to run execute()

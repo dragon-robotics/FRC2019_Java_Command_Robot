@@ -27,9 +27,14 @@ public class Limelight_Camera_Subsystem extends Subsystem {
   /* To be completed */
 
   /* Contour Information - 1 if found, 0 is not */
-  public int Find_Target(){
+  public boolean Find_Target(){
     int tv = (int)NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-    return tv;
+    if(tv > 0){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   public double Get_X(){

@@ -33,17 +33,17 @@ public class Find_HP_Target extends Command {
   protected void execute() {
     /* Rotate the robot until target is valid depending on the direction */
     if(direction < 1){
-      Robot.m_drivetrain_subsystem.TankDrive(-1, 1);
+      Robot.m_drivetrain_subsystem.ArcadeDrive(0, 0.5);
     }
     else{
-      Robot.m_drivetrain_subsystem.TankDrive(1, -1);
+      Robot.m_drivetrain_subsystem.ArcadeDrive(0, -0.5);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.m_limelight_camera_subsystem.Find_Target() == 1){
+    if(Robot.m_limelight_camera_subsystem.Find_Target()){
       return true;
     }
     else{

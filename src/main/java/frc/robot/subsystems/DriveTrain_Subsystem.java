@@ -39,7 +39,7 @@ public class DriveTrain_Subsystem extends Subsystem {
     setDefaultCommand(new Arcade_Drive());
   }
 
-  public void TeleopDrive(double leftJoyY, double rightJoyX){
+  public void ArcadeDrive(double leftJoyY, double rightJoyX){
     m_robotDrive.arcadeDrive(leftJoyY, rightJoyX);
   }
 
@@ -49,6 +49,6 @@ public class DriveTrain_Subsystem extends Subsystem {
 
   public void Stop(){
     m_robotDrive.arcadeDrive(0, 0); // Stops the robot
-    m_robotDrive.tankDrive(0, 0); // Stops the robot
+    //m_robotDrive.tankDrive(0, 0); // Stops the robot
   }
 }
