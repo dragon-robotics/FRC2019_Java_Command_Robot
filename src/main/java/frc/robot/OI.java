@@ -8,11 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;    // A WPI library used for joystick buttons mapping
+import edu.wpi.first.wpilibj.buttons.JoystickButton; // A WPI library used for joystick buttons mapping
 
 import frc.robot.commands.Elevator_Up;
+import frc.robot.commands.Find_HP_Target;
 import frc.robot.commands.Deploy_Cargo;
 import frc.robot.commands.Deploy_Hatch;
+import frc.robot.commands.Drive_To_HP_Target;
 import frc.robot.commands.Elevator_Move;
 import frc.robot.commands.Elevator_Down;
 import frc.robot.commands.HatchPanel_Forward;
@@ -89,6 +91,9 @@ public class OI {
       // j_stick_control_B.whenPressed(new Deploy_Hatch());
       // j_stick_control_Y.whenPressed(new Deploy_Cargo());
       // j_stick_control_X.whileHeld(new Elevator_Move());
+
+      j_stick_driver_A.whenPressed(new Find_HP_Target());
+      j_stick_driver_B.whenPressed(new Drive_To_HP_Target());
 
     }
 }

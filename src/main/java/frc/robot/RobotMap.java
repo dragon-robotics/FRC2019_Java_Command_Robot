@@ -60,6 +60,14 @@ public class RobotMap {
   public static final int CAN_DOUBLESOLENOID_2_LEFT = 2;
   public static final int CAN_DOUBLESOLENOID_2_RIGHT = 3;
 
+  /* Directions */
+  public static final int LEFT = 0;
+  public static final int RIGHT = 0;
+
+  /* Starting Habitat Level */
+  public static final int LEVEL_ONE = 1;
+  public static final int LEVEL_TWO = 2;
+
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static final int rangefinderPort = 1;

@@ -23,7 +23,7 @@ import edu.wpi.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.cameraserver.CameraServer;
 
 // Commands //
-import frc.robot.commands.Arcade_Drive;
+import frc.robot.commands.Teleop_Drive;
 import frc.robot.commands.Auto_Drive;
 
 
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
     m_elevator_subsystem = new Elevator_Subsystem();
     m_limelight_camera_subsystem = new Limelight_Camera_Subsystem();   
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new Arcade_Drive());
+    m_chooser.setDefaultOption("Default Auto", new Teleop_Drive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
@@ -118,29 +118,21 @@ public class Robot extends TimedRobot {
     // m_autonomousCommand = m_chooser.getSelected();
     String autoSelected = SmartDashboard.getString("Auto Selector", "Right Side Auto Lvl2"); 
     
-    /* Direction */
-    int LEFT = 1;
-    int RIGHT = 0;
-
-    /* Starting Level */
-    int LEVEL_ONE = 1;
-    int LEVEL_TWO = 2;
-
     switch(autoSelected) { 
       case "Right Side Auto Lvl2": 
-        m_autonomousCommand = new Auto_Drive(LEVEL_TWO, RIGHT);
+        m_autonomousCommand = new Auto_Drive(RobotMap.LEVEL_TWO, RobotMap.RIGHT);
         break; 
       case "Left Side Auto Lvl2":
-        m_autonomousCommand = new Auto_Drive(LEVEL_TWO, LEFT);
+        m_autonomousCommand = new Auto_Drive(RobotMap.LEVEL_TWO, RobotMap.LEFT);
         break;
       case "Right Side Auto Lvl1":
-        m_autonomousCommand = new Auto_Drive(LEVEL_ONE, RIGHT);
+        m_autonomousCommand = new Auto_Drive(RobotMap.LEVEL_ONE, RobotMap.RIGHT);
         break;
       case "Left Side Auto Lvl1":
-        m_autonomousCommand = new Auto_Drive(LEVEL_ONE, LEFT);
+        m_autonomousCommand = new Auto_Drive(RobotMap.LEVEL_ONE, RobotMap.LEFT);
         break;
       default:
-        m_autonomousCommand = new Arcade_Drive();
+        m_autonomousCommand = new Teleop_Drive();
         break;
     }
     

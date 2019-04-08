@@ -7,14 +7,24 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class Arcade_Drive extends Command {
-  public Arcade_Drive() {
+public class Arcade_Drive extends TimedCommand {
+  private double time;
+  private double drive_speed;
+  private double steer_speed;
+  
+  public Arcade_Drive(double time, double drive_speed, double steer_speed) {
+    super(time);
+    
     // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+
     requires(Robot.m_drivetrain_subsystem);
+
+    this.drive_speed = drive_speed;
+    this.steer_speed = steer_speed;
   }
 
   // Called just before this Command runs the first time
@@ -25,21 +35,7 @@ public class Arcade_Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean LB_Pressed = Robot.m_oi.j_stick_driver_LB.get();
-    boolean RB_Pressed = Robot.m_oi.j_stick_driver_RB.get();
-    
-    double leftJoyY = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_LEFT_Y);
-    double rightJoyX = Robot.m_oi.j_stick_driver.getRawAxis(RobotMap.AXIS_RIGHT_X);
-    int flipped = RB_Pressed ? -1 : 1;  // 1 for normal, 1 for flipped
-    leftJoyY = LB_Pressed ? leftJoyY / 2 : leftJoyY;
-    rightJoyX = LB_Pressed ? rightJoyX / 2 : rightJoyX;
-    Robot.m_drivetrain_subsystem.ArcadeDrive(leftJoyY * flipped, rightJoyX);
-  }
-
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
+    Robot.m_drivetrain_subsystem.ArcadeDrive(drive_speed, steer_speed);
   }
 
   // Called once after isFinished returns true

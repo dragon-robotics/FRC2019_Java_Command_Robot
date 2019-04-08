@@ -45,28 +45,31 @@ public class Auto_Drive extends CommandGroup {
     
     addSequential(new Manual_Drive_Forward(forward_time, forward_speed));
     
-    /* Drive path to the 
+    /* 
+      Drive path to the HP
         Left     Right
           |        |
           |        |
           \        /
-           \      /
-           |      |
-           |      |
-    ===============================
+            \      /
+            |      |
+            |      |
+      ==================
     */
 
-    double steering_time = 0.5;
     double drive_time = 1;
-    double steer_amount = 0.5;
-
-    addSequential(new Tank_Drive(drive_time, 1, 1));
-    addSequential(new Tank_Drive(steering_time, 1 - (direction * steer_amount), steer_amount + (direction * steer_amount)));
-    addSequential(new Tank_Drive(steering_time, steer_amount + (direction * steer_amount), 1 - (direction * steer_amount)));
-    addSequential(new Tank_Drive(drive_time, 1, 1));
-
+    double drive_amount = 0.7;
+    double drive_path_steering_time = 0.5;
+    double drive_path_steer_amount = 0.1;
+    
+    addSequential(new Arcade_Drive(drive_time, drive_amount, 0));
+    addSequential(new Arcade_Drive(drive_path_steering_time, drive_amount, drive_path_steer_amount));
+    addSequential(new Arcade_Drive(drive_path_steering_time, drive_amount, -drive_path_steer_amount));
+    addSequential(new Arcade_Drive(drive_time, 1, 0));
+    
     /* Find the HP target */
-    addSequential(new Find_HP_Target(direction));
+    double find_target_steer_amount = 0.5;
+    addSequential(new Find_HP_Target(direction, find_target_steer_amount));
     addSequential(new Drive_To_HP_Target());
     addSequential(new Piston_Deploy());
     addSequential(new Manual_Drive_Backward(0.3, 1));
