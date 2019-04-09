@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -21,7 +23,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.cameraserver.CameraServer;
-
+import edu.wpi.first.networktables.NetworkTableEntry;
 // Commands //
 import frc.robot.commands.Teleop_Drive;
 import frc.robot.commands.Auto_Drive;
@@ -51,6 +53,24 @@ public class Robot extends TimedRobot {
   public static Limelight_Camera_Subsystem m_limelight_camera_subsystem;
   public static OI m_oi;
 
+  /* Shuffleboard Tabs + Widgets */
+  public static ShuffleboardTab tab;
+  public static NetworkTableEntry direction_nt;
+  public static NetworkTableEntry steer_speed_nt;
+
+  public static NetworkTableEntry steer_p_nt;
+  public static NetworkTableEntry steer_i_nt;
+  public static NetworkTableEntry steer_d_nt;
+
+  public static NetworkTableEntry drive_p_nt;
+  public static NetworkTableEntry drive_i_nt;
+  public static NetworkTableEntry drive_d_nt;
+
+  public static NetworkTableEntry desired_target_area_nt;
+  public static NetworkTableEntry desired_target_steer_angle_nt;
+  public static NetworkTableEntry max_drive_nt;
+  public static NetworkTableEntry steer_error_threshold_nt;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -74,6 +94,20 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new Teleop_Drive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    tab = Shuffleboard.getTab("Test");
+    direction_nt = tab.add("Direction", 1).getEntry();
+    steer_speed_nt = tab.add("Steer Speed", 1).getEntry();
+    steer_p_nt = tab.add("Steer kP", 1).getEntry();
+    steer_i_nt = tab.add("Steer kI", 1).getEntry();
+    steer_d_nt = tab.add("Steer kD", 1).getEntry();
+    drive_p_nt = tab.add("Drive kP", 1).getEntry();
+    drive_i_nt = tab.add("Drive kI", 1).getEntry();
+    drive_d_nt = tab.add("Drive kD", 1).getEntry();
+    desired_target_area_nt = tab.add("Desired Target Area", 1).getEntry();
+    desired_target_steer_angle_nt = tab.add("Desired Target Steer Angle", 1).getEntry();
+    max_drive_nt = tab.add("Max Drive", 1).getEntry();
+    steer_error_threshold_nt = tab.add("Steer Error Threshold", 1).getEntry();
   }
 
   /**
@@ -116,7 +150,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // m_autonomousCommand = m_chooser.getSelected();
-    String autoSelected = SmartDashboard.getString("Auto Selector", "Right Side Auto Lvl2"); 
+    String autoSelected = SmartDashboard.getString("Auto Selector", "Right Side Auto Lvl2");
     
     switch(autoSelected) { 
       case "Right Side Auto Lvl2": 

@@ -7,11 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Robot;
 import frc.robot.libraries.MovingAverage;
 
@@ -39,20 +36,6 @@ public class Drive_To_HP_Target extends Command {
 
   private Timer timer;
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("Test");
-  private NetworkTableEntry steer_p_nt = tab.add("Steer kP", 1).getEntry();
-  private NetworkTableEntry steer_i_nt = tab.add("Steer kI", 1).getEntry();
-  private NetworkTableEntry steer_d_nt = tab.add("Steer kD", 1).getEntry();
-
-  private NetworkTableEntry drive_p_nt = tab.add("Drive kP", 1).getEntry();
-  private NetworkTableEntry drive_i_nt = tab.add("Drive kI", 1).getEntry();
-  private NetworkTableEntry drive_d_nt = tab.add("Drive kD", 1).getEntry();
-
-  private NetworkTableEntry desired_target_area_nt = tab.add("Desired Target Area", 1).getEntry();
-  private NetworkTableEntry desired_target_steer_angle_nt = tab.add("Desired Target Steer Angle", 1).getEntry();
-  private NetworkTableEntry max_drive_nt = tab.add("Max Drive", 1).getEntry();
-  private NetworkTableEntry steer_error_threshold_nt = tab.add("Steer Error Threshold", 1).getEntry();
-
   public Drive_To_HP_Target() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -63,16 +46,16 @@ public class Drive_To_HP_Target extends Command {
     timer = new Timer();
     timer.start();  // Start the timer
 
-    STEER_kP = steer_p_nt.getDouble(0.03);
-    STEER_kI = steer_i_nt.getDouble(0);
-    STEER_kD = steer_d_nt.getDouble(0);
-    DRIVE_kP = drive_p_nt.getDouble(0.26);
-    DRIVE_kI = drive_i_nt.getDouble(0);
-    DRIVE_kD = drive_d_nt.getDouble(0);
-    DESIRED_TARGET_AREA = desired_target_area_nt.getDouble(13);
-    DESIRED_TARGET_STEER_ANGLE = desired_target_steer_angle_nt.getDouble(0);
-    MAX_DRIVE = max_drive_nt.getDouble(0.7);
-    STEER_ERROR_THRESHOLD = steer_error_threshold_nt.getDouble(0.0037);
+    STEER_kP = Robot.steer_p_nt.getDouble(0.03);
+    STEER_kI = Robot.steer_i_nt.getDouble(0);
+    STEER_kD = Robot.steer_d_nt.getDouble(0);
+    DRIVE_kP = Robot.drive_p_nt.getDouble(0.26);
+    DRIVE_kI = Robot.drive_i_nt.getDouble(0);
+    DRIVE_kD = Robot.drive_d_nt.getDouble(0);
+    DESIRED_TARGET_AREA = Robot.desired_target_area_nt.getDouble(5);
+    DESIRED_TARGET_STEER_ANGLE = Robot.desired_target_steer_angle_nt.getDouble(0);
+    MAX_DRIVE = Robot.max_drive_nt.getDouble(0.7);
+    STEER_ERROR_THRESHOLD = Robot.steer_error_threshold_nt.getDouble(0.0037);
   }
 
   // Called just before this Command runs the first time
@@ -84,7 +67,7 @@ public class Drive_To_HP_Target extends Command {
   @Override
   protected void execute() {
     /* Grab current time */
-    current_time = timer.getFPGATimestamp();
+    current_time = timer.get();
 
     double tx = Robot.m_limelight_camera_subsystem.Get_X();
     double ta = Robot.m_limelight_camera_subsystem.Get_Area();
@@ -130,9 +113,7 @@ public class Drive_To_HP_Target extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    double ta = Robot.m_limelight_camera_subsystem.Get_Area();
-
-    if(ta >= DESIRED_TARGET_AREA){
+    if(drive_moving_avg_list.getMovingAverage() >= DESIRED_TARGET_AREA){
       return true;
     }
     else{

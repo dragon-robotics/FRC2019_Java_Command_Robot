@@ -7,10 +7,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -19,14 +16,10 @@ public class Find_HP_Target extends Command {
   private int direction;
   private double steer_speed;
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("Test");
-  private NetworkTableEntry direction_nt = tab.add("Direction", 1).getEntry();
-  private NetworkTableEntry steer_speed_nt = tab.add("Steer Speed", 1).getEntry();
-
   /* This is for testing input */
   public Find_HP_Target(){
-    direction = (int)direction_nt.getDouble(RobotMap.LEFT); // Defaults to left
-    steer_speed = steer_speed_nt.getDouble(0.5);            // Defaults to half-speed for turning
+    direction = (int)Robot.direction_nt.getDouble(RobotMap.LEFT); // Defaults to left
+    steer_speed = Robot.steer_speed_nt.getDouble(0.5);            // Defaults to half-speed for turning
   }
 
   /* This is using tuned input */
@@ -50,10 +43,10 @@ public class Find_HP_Target extends Command {
   protected void execute() {
     /* Rotate the robot until target is valid depending on the direction */
     if(direction < 1){
-      Robot.m_drivetrain_subsystem.ArcadeDrive(0, direction);
+      Robot.m_drivetrain_subsystem.ArcadeDrive(0, steer_speed);
     }
     else{
-      Robot.m_drivetrain_subsystem.ArcadeDrive(0, -direction);
+      Robot.m_drivetrain_subsystem.ArcadeDrive(0, -steer_speed);
     }
   }
 
