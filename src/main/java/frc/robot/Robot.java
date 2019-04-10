@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
 
   /* Shuffleboard Tabs + Widgets */
-  public static ShuffleboardTab tab;
+  public static ShuffleboardTab test_tab;
   public static NetworkTableEntry direction_nt;
   public static NetworkTableEntry steer_speed_nt;
 
@@ -70,6 +70,21 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry desired_target_steer_angle_nt;
   public static NetworkTableEntry max_drive_nt;
   public static NetworkTableEntry steer_error_threshold_nt;
+
+  public static ShuffleboardTab auto_drive_tab;
+  public static NetworkTableEntry forward_time_nt;
+  public static NetworkTableEntry forward_speed_nt;
+  public static NetworkTableEntry lvl2_forward_time_nt;
+  public static NetworkTableEntry lvl2_forward_speed_nt;
+
+  public static NetworkTableEntry drive_time_nt;
+  public static NetworkTableEntry drive_amount_nt;
+  public static NetworkTableEntry drive_path_steering_time_nt;
+  public static NetworkTableEntry drive_path_steer_amount_nt;
+
+  public static NetworkTableEntry find_target_steer_amount_nt;
+  public static NetworkTableEntry backward_time_nt;
+  public static NetworkTableEntry backward_speed_nt;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -95,19 +110,32 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
 
-    tab = Shuffleboard.getTab("Test");
-    direction_nt = tab.add("Direction", 1).getEntry();
-    steer_speed_nt = tab.add("Steer Speed", 1).getEntry();
-    steer_p_nt = tab.add("Steer kP", 1).getEntry();
-    steer_i_nt = tab.add("Steer kI", 1).getEntry();
-    steer_d_nt = tab.add("Steer kD", 1).getEntry();
-    drive_p_nt = tab.add("Drive kP", 1).getEntry();
-    drive_i_nt = tab.add("Drive kI", 1).getEntry();
-    drive_d_nt = tab.add("Drive kD", 1).getEntry();
-    desired_target_area_nt = tab.add("Desired Target Area", 1).getEntry();
-    desired_target_steer_angle_nt = tab.add("Desired Target Steer Angle", 1).getEntry();
-    max_drive_nt = tab.add("Max Drive", 1).getEntry();
-    steer_error_threshold_nt = tab.add("Steer Error Threshold", 1).getEntry();
+    test_tab = Shuffleboard.getTab("Test");
+    direction_nt = test_tab.add("Direction", 1).getEntry();
+    steer_speed_nt = test_tab.add("Steer Speed", 1).getEntry();
+    steer_p_nt = test_tab.add("Steer kP", 1).getEntry();
+    steer_i_nt = test_tab.add("Steer kI", 1).getEntry();
+    steer_d_nt = test_tab.add("Steer kD", 1).getEntry();
+    drive_p_nt = test_tab.add("Drive kP", 1).getEntry();
+    drive_i_nt = test_tab.add("Drive kI", 1).getEntry();
+    drive_d_nt = test_tab.add("Drive kD", 1).getEntry();
+    desired_target_area_nt = test_tab.add("Desired Target Area", 1).getEntry();
+    desired_target_steer_angle_nt = test_tab.add("Desired Target Steer Angle", 1).getEntry();
+    max_drive_nt = test_tab.add("Max Drive", 1).getEntry();
+    steer_error_threshold_nt = test_tab.add("Steer Error Threshold", 1).getEntry();
+
+    auto_drive_tab = Shuffleboard.getTab("Auto Drive");
+    forward_time_nt = test_tab.add("Forward Time", 1).getEntry();
+    forward_speed_nt = test_tab.add("Forward Speed", 1).getEntry();
+    lvl2_forward_time_nt = test_tab.add("Level 2 Foward Time", 1).getEntry();
+    lvl2_forward_speed_nt = test_tab.add("Level 2 Forward Speed", 1).getEntry();
+    drive_time_nt = test_tab.add("Drive Time", 1).getEntry();
+    drive_amount_nt = test_tab.add("Drive Amount", 1).getEntry();
+    drive_path_steering_time_nt = test_tab.add("Drive Path Steering Time", 1).getEntry();
+    drive_path_steer_amount_nt = test_tab.add("Drive Path Steer Amount", 1).getEntry();
+    find_target_steer_amount_nt = test_tab.add("Find Target Steer Amount", 1).getEntry();
+    backward_time_nt = test_tab.add("Backward Time", 1).getEntry();
+    backward_speed_nt = test_tab.add("Backward Speed", 1).getEntry();
   }
 
   /**
